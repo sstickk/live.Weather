@@ -4,6 +4,8 @@
 
 console.log("Made by Seth Stitik (:");
 console.log("Don't worry, your location information is not stored or viewed!");
+console.log("API Key:", weather.apikey);
+
 
 let weather = {
     apikey: process.env.OPENWEATHERMAP_API_KEY,
