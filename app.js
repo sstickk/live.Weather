@@ -4,11 +4,9 @@
 
 console.log("Made by Seth Stitik (:");
 console.log("Don't worry, your location information is not stored or viewed!");
-console.log("API Key:", weather.apikey);
-
 
 let weather = {
-    apikey: process.env.OPENWEATHERMAP_API_KEY,
+    apikey: "7950f51d76eb6d0a68ae57e95c9bda5b",
     units: {
         imperial: {
             temperature: "imperial",
