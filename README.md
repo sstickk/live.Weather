@@ -29,4 +29,4 @@ Credits:
 
 Enjoy using live.Weather to stay updated on the weather conditions of your desired locations! If you have any suggestions or feedback, feel free to contact Seth Stitik at sstitik@gmail.com or via LinkedIn (https://www.linkedin.com/in/seth-stitik)
 
-Made with <3 by Seth Stitik (:
+Made with ❤️ by Seth Stitik (:
