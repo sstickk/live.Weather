@@ -52,7 +52,7 @@ let weather = {
     },
 
     fetchBackgroundImage: function (city) {
-        const unsplashApiKey = process.env.UNSPLASH_API_KEY;
+        const unsplashApiKey = "pn8HbZxzYti0FpQkWJCMqPKhSN6S8E7Zl-nlHQJWcIk";
         const unsplashApiUrl = `https://api.unsplash.com/search/photos?query=${city}&per_page=1&client_id=${unsplashApiKey}`;
 
         fetch(unsplashApiUrl)
