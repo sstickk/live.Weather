@@ -6,7 +6,7 @@ console.log("Made by Seth Stitik (:");
 console.log("Don't worry, your location information is not stored or viewed!");
 
 let weather = {
-    apikey: "7950f51d76eb6d0a68ae57e95c9bda5b",
+    apikey: process.env.OPENWEATHERMAP_API_KEY,
     units: {
         imperial: {
             temperature: "imperial",
@@ -52,7 +52,7 @@ let weather = {
     },
 
     fetchBackgroundImage: function (city) {
-        const unsplashApiKey = "pn8HbZxzYti0FpQkWJCMqPKhSN6S8E7Zl-nlHQJWcIk";
+        const unsplashApiKey = process.env.UNSPLASH_API_KEY;
         const unsplashApiUrl = `https://api.unsplash.com/search/photos?query=${city}&per_page=1&client_id=${unsplashApiKey}`;
 
         fetch(unsplashApiUrl)
