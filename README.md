@@ -23,8 +23,10 @@ To use the live.Weather app, follow these simple steps:
 *Note: The app does not store or view any of your location information, ensuring your privacy is protected*
 
 Credits:
--Seth Stitik - Developer of the live.Weather app.
--OpenWeather API - Provides the weather data for the app.
+-Seth Stitik 
+- Developer of the live.Weather app.
+-OpenWeather API
+- Provides the weather data for the app.
 -Unsplash - Provides the beautiful background images based on location searches.
 
 Enjoy using live.Weather to stay updated on the weather conditions of your desired locations! If you have any suggestions or feedback, feel free to contact Seth Stitik at sstitik@gmail.com or via LinkedIn (https://www.linkedin.com/in/seth-stitik)
