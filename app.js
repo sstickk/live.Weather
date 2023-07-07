@@ -7,7 +7,6 @@ console.log("Don't worry, your location information is not stored or viewed!");
 
 let weather = {
     apikey: '7950f51d76eb6d0a68ae57e95c9bda5b',
-    // apikey: '${{ secrets.OPENWEATHERMAP_API_KEY }}',
     units: {
         imperial: {
             temperature: "imperial",
