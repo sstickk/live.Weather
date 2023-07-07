@@ -27,7 +27,7 @@ const weather = {
 
     fetchWeather: function (city) {
         fetch(
-            "https://api.openweathermap.org/data/2.5/weather?q=" +
+            "/.netlify/functions/weather?q=" +
             city +
             "&units=" +
             this.units[this.currentUnit].temperature +
@@ -40,7 +40,7 @@ const weather = {
 
     fetchWeatherByLocation: function (latitude, longitude) {
         fetch(
-            "https://api.openweathermap.org/data/2.5/weather?lat=" +
+            "/.netlify/functions/weather?lat=" +
             latitude +
             "&lon=" +
             longitude +
