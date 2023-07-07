@@ -5,7 +5,8 @@
 console.log("Made by Seth Stitik (:");
 console.log("Don't worry, your location information is not stored or viewed!");
 
-import { OPENWEATHER_API_KEY, UNSPLASH_API_KEY } from './apikey.js';
+const OPENWEATHER_API_KEY = process.env.OPENWEATHER_API_KEY;
+const UNSPLASH_API_KEY = process.env.UNSPLASH_API_KEY;
 
 const weather = {
     units: {
