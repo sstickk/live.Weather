@@ -1,0 +1,16 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[[plugins]]
+  package = "@netlify/plugin-functions-core"
+
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
+
+[build.environment]
+  OPENWEATHER_API_KEY = "7950f51d76eb6d0a68ae57e95c9bda5b"
+  UNSPLASH_API_KEY = "pn8HbZxzYti0FpQkWJCMqPKhSN6S8E7Zl-nlHQJWcIk"
