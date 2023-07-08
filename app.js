@@ -5,8 +5,7 @@
 console.log("Made by Seth Stitik (:");
 console.log("Don't worry, your location information is not stored or viewed!");
 
-const OPENWEATHER_API_KEY = process.env.OPENWEATHER_API_KEY;
-const UNSPLASH_API_KEY = process.env.UNSPLASH_API_KEY;
+import { OPENWEATHER_API_KEY, UNSPLASH_API_KEY } from './apikey.js';
 
 const weather = {
     units: {
@@ -27,7 +26,7 @@ const weather = {
 
     fetchWeather: function (city) {
         fetch(
-            "/.netlify/functions/weather?q=" +
+            "https://api.openweathermap.org/data/2.5/weather?q=" +
             city +
             "&units=" +
             this.units[this.currentUnit].temperature +
@@ -40,7 +39,7 @@ const weather = {
 
     fetchWeatherByLocation: function (latitude, longitude) {
         fetch(
-            "/.netlify/functions/weather?lat=" +
+            "https://api.openweathermap.org/data/2.5/weather?lat=" +
             latitude +
             "&lon=" +
             longitude +
