@@ -2,6 +2,8 @@
 // Made by Seth Stitik //
 /////////////////////////
 
+const { response } = require("express");
+
 console.log("Made by Seth Stitik (:");
 console.log("Don't worry, your location information is not stored or viewed!");
 
@@ -28,26 +30,8 @@ const weather = {
             .then((data) => this.displayWeather(data));
     },
 
-
-    fetchWeatherByLocation: function (latitude, longitude) {
-        fetch(
-            "https://api.openweathermap.org/data/2.5/weather?lat=" +
-            latitude +
-            "&lon=" +
-            longitude +
-            "&units=" +
-            this.units[this.currentUnit].temperature +
-            "&appid=" +
-            OPENWEATHER_API_KEY
-        )
-            .then((response) => response.json())
-            .then((data) => this.displayWeather(data));
-    },
-
     fetchBackgroundImage: function (city) {
-        const unsplashApiUrl = `https://api.unsplash.com/search/photos?query=${city}&per_page=1&client_id=${UNSPLASH_API_KEY}`;
-
-        fetch(unsplashApiUrl)
+        fetch(`/image/${city}`)
             .then((response) => response.json())
             .then((data) => {
                 if (data.results && data.results.length > 0) {
@@ -86,12 +70,18 @@ const weather = {
         }
     },
 
+    fetchWeatherByLocation: function (latitude, longitude) {
+        fetch(`/weather/${latitude},${longitude}`)
+            .then((response) => response.json())
+            .then((data) => this.displayWeather(data));
+    },
+
     displayWeather: function (data) {
-        const { weather, unsplash } = data;
+        const { weather } = data;
         const { name } = weather;
         const { icon, description } = weather.weather[0];
-        const { temp, humidity } = data.main;
-        const { speed, deg } = data.wind;
+        const { temp, humidity } = weather.main;
+        const { speed, deg } = weather.wind;
         const directions = ["North ", "NE ", "East ", "SE ", "South ", "SW ", "West ", "NW "];
         const direction = directions[Math.round(deg / 45) % 8];
 
@@ -110,7 +100,6 @@ const weather = {
 
         document.querySelector(".wind").innerText = "Wind: " + direction + windSpeed;
         document.querySelector(".weather").classList.remove("loading");
-        this.fetchBackgroundImage(name);
     },
 
     search: function () {
