@@ -23,17 +23,11 @@ const weather = {
     currentUnit: "imperial",
 
     fetchWeather: function (city) {
-        fetch(
-            "https://api.openweathermap.org/data/2.5/weather?q=" +
-            city +
-            "&units=" +
-            this.units[this.currentUnit].temperature +
-            "&appid=" +
-            OPENWEATHER_API_KEY
-        )
+        fetch(`/weather/${city}`)
             .then((response) => response.json())
             .then((data) => this.displayWeather(data));
     },
+
 
     fetchWeatherByLocation: function (latitude, longitude) {
         fetch(
@@ -93,8 +87,9 @@ const weather = {
     },
 
     displayWeather: function (data) {
-        const { name } = data;
-        const { icon, description } = data.weather[0];
+        const { weather, unsplash } = data;
+        const { name } = weather;
+        const { icon, description } = weather.weather[0];
         const { temp, humidity } = data.main;
         const { speed, deg } = data.wind;
         const directions = ["North ", "NE ", "East ", "SE ", "South ", "SW ", "West ", "NW "];
