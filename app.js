@@ -2,8 +2,6 @@
 // Made by Seth Stitik //
 /////////////////////////
 
-const { response } = require("express");
-
 console.log("Made by Seth Stitik (:");
 console.log("Don't worry, your location information is not stored or viewed!");
 
