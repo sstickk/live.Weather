@@ -5,7 +5,8 @@
 console.log("Made by Seth Stitik (:");
 console.log("Don't worry, your location information is not stored or viewed!");
 
-const weather = {
+let weather = {
+    apikey: "7950f51d76eb6d0a68ae57e95c9bda5b",
     units: {
         imperial: {
             temperature: "imperial",
@@ -23,13 +24,38 @@ const weather = {
     currentUnit: "imperial",
 
     fetchWeather: function (city) {
-        fetch(`/weather/${city}`)
+        fetch(
+            "https://api.openweathermap.org/data/2.5/weather?q=" +
+            city +
+            "&units=" +
+            this.units[this.currentUnit].temperature +
+            "&appid=" +
+            this.apikey
+        )
+            .then((response) => response.json())
+            .then((data) => this.displayWeather(data));
+    },
+
+    fetchWeatherByLocation: function (latitude, longitude) {
+        fetch(
+            "https://api.openweathermap.org/data/2.5/weather?lat=" +
+            latitude +
+            "&lon=" +
+            longitude +
+            "&units=" +
+            this.units[this.currentUnit].temperature +
+            "&appid=" +
+            this.apikey
+        )
             .then((response) => response.json())
             .then((data) => this.displayWeather(data));
     },
 
     fetchBackgroundImage: function (city) {
-        fetch(`/image/${city}`)
+        const unsplashApiKey = "pn8HbZxzYti0FpQkWJCMqPKhSN6S8E7Zl-nlHQJWcIk";
+        const unsplashApiUrl = `https://api.unsplash.com/search/photos?query=${city}&per_page=1&client_id=${unsplashApiKey}`;
+
+        fetch(unsplashApiUrl)
             .then((response) => response.json())
             .then((data) => {
                 if (data.results && data.results.length > 0) {
@@ -41,6 +67,8 @@ const weather = {
                 console.error("Error fetching background image:", error);
             });
     },
+
+
 
     toggleUnit: function () {
         const unitToggle = document.getElementById("unit-toggle");
@@ -68,37 +96,33 @@ const weather = {
         }
     },
 
-    fetchWeatherByLocation: function (latitude, longitude) {
-        fetch(`/weather/${latitude},${longitude}`)
-            .then((response) => response.json())
-            .then((data) => this.displayWeather(data));
-    },
 
     displayWeather: function (data) {
-        const { weather } = data;
-        const { name } = weather;
-        const { icon, description } = weather.weather[0];
-        const { temp, humidity } = weather.main;
-        const { speed, deg } = weather.wind;
+        const { name } = data;
+        const { icon, description } = data.weather[0];
+        const { temp, humidity } = data.main;
+        const { speed, deg } = data.wind;
         const directions = ["North ", "NE ", "East ", "SE ", "South ", "SW ", "West ", "NW "];
         const direction = directions[Math.round(deg / 45) % 8];
 
         document.querySelector(".city").innerText = "Weather in " + name;
         document.querySelector(".icon").src = "https://openweathermap.org/img/wn/" + icon + ".png";
         document.querySelector(".description").innerText = description;
-        document.querySelector(".temp").innerText = Math.round(temp) + this.units[this.currentUnit].temperatureSymbol;
+        document.querySelector(".temp").innerText = Math.round(temp) + weather.units[weather.currentUnit].temperatureSymbol;
         document.querySelector(".humidity").innerText = "Humidity: " + humidity + "%";
 
         let windSpeed;
-        if (this.currentUnit === "metric") {
-            windSpeed = Math.round(speed * 3.6 / 1.609) + this.units[this.currentUnit].windSpeedSymbol;
-        } else if (this.currentUnit === "imperial") {
-            windSpeed = Math.round(speed / 1.609) + this.units[this.currentUnit].windSpeedSymbol;
+        if (weather.currentUnit === "metric") {
+            windSpeed = Math.round(speed * 3.6 / 1.609) + weather.units[weather.currentUnit].windSpeedSymbol;
+        } else if (weather.currentUnit === "imperial") {
+            windSpeed = Math.round(speed / 1.609) + weather.units[weather.currentUnit].windSpeedSymbol;
         }
 
         document.querySelector(".wind").innerText = "Wind: " + direction + windSpeed;
         document.querySelector(".weather").classList.remove("loading");
+        this.fetchBackgroundImage(name);
     },
+
 
     search: function () {
         const searchValue = document.querySelector(".search-bar").value;
